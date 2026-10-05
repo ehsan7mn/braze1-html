@@ -364,6 +364,14 @@
         }
     }
 
+    var reviewsLayout = document.querySelector(".reviews-layout");
+    var reviewsSide = document.querySelector(".reviews-side");
+    function syncReviewHeight() {
+        if (!reviewsLayout || !reviewsSide) {
+            return;
+        }
+        reviewsLayout.style.setProperty("--side-h", reviewsSide.offsetHeight + "px");
+    }
     document.querySelectorAll(".review-card").forEach(function (card) {
         var text = card.querySelector(".review-text");
         if (text) {
@@ -378,6 +386,11 @@
             text.style.webkitLineClamp = "";
         }
     });
+    syncReviewHeight();
+    window.addEventListener("resize", syncReviewHeight);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(syncReviewHeight);
+    }
 
     var blogCards = document.querySelectorAll(".blog-card");
     var blogSection = document.querySelector(".blog-section");
