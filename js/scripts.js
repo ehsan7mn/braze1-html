@@ -284,8 +284,9 @@
     if (typeof Swiper !== "undefined" && document.querySelector(".review-swiper")) {
         new Swiper(".review-swiper", {
             slidesPerView: 3,
-            spaceBetween: 24,
+            spaceBetween: 16,
             loop: true,
+            watchOverflow: true,
             speed: 650,
             autoplay: {
                 delay: 4200,
@@ -332,6 +333,18 @@
         }
         requestAnimationFrame(tick);
     }
+    var logoSets = document.querySelectorAll(".logo-set");
+    if (logoSets.length) {
+        var seed = logoSets[0].innerHTML;
+        var guard = 0;
+        while (logoSets[0].getBoundingClientRect().width < window.innerWidth + 80 && guard < 5) {
+            logoSets.forEach(function (set) {
+                set.insertAdjacentHTML("beforeend", seed);
+            });
+            guard += 1;
+        }
+    }
+
     if ("IntersectionObserver" in window && counters.length) {
         var countObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
