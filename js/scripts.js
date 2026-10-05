@@ -27,6 +27,35 @@
         });
     });
 
+    var rotator = document.querySelector(".intro-words");
+    if (rotator) {
+        var rotWords = [].slice.call(rotator.querySelectorAll("b"));
+        var rotIndex = Math.max(0, rotWords.findIndex(function (word) {
+            return word.classList.contains("is-visible");
+        }));
+        function rotWidth(word) {
+            return Math.ceil(word.getBoundingClientRect().width);
+        }
+        if (rotWords.length) {
+            rotator.style.width = rotWidth(rotWords[rotIndex]) + "px";
+        }
+        if (rotWords.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            window.setInterval(function () {
+                var current = rotWords[rotIndex];
+                rotIndex = (rotIndex + 1) % rotWords.length;
+                var next = rotWords[rotIndex];
+                rotator.style.width = rotWidth(next) + "px";
+                current.classList.remove("is-visible", "is-in");
+                current.classList.add("is-out");
+                next.classList.remove("is-out");
+                next.classList.add("is-visible", "is-in");
+                window.setTimeout(function () {
+                    current.classList.remove("is-out");
+                }, 1200);
+            }, 3200);
+        }
+    }
+
     function initHeroGlitch(swiper) {
         var canvas = document.getElementById("heroGlitch");
         var box = document.querySelector(".hero-swiper");

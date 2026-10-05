@@ -33,8 +33,9 @@ body {
 	--yellow1:#ffce72;
 	--gray_dark:#616161;
 	--footer:#0f4229;
+	--red1:#e91227;
 	--radius1:32px;
-	--radius2:10px;
+	--radius2:20px;
 	font-variation-settings: "CNTR" 50, "wdth" 87;
 	--gra1: linear-gradient(to right, var(--primary) 0%, var(--secondary) 51%, var(--primary) 100%);
 	--gra-gray:linear-gradient(220deg, var(--gray1) 0%,var(--gray2) 100%);
@@ -494,17 +495,61 @@ section {
 .intro-section .col-lg-6,
 .intro-section .col-lg-3 {
 	display: flex;
+	min-height: 0;
 }
 .intro-panel {
 	position: relative;
 	flex: 1;
 	width: 100%;
+	height: 272px;
 	padding: 28px 28px 64px;
 	background: var(--gray3);
 	border-radius: var(--radius2);
 	font-size: 15px;
 }
+.intro-rotate {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 8px;
+	color: var(--red1);
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+.intro-words {
+	display: inline-block;
+	position: relative;
+	height: 1.2em;
+	perspective: 300px;
+	vertical-align: bottom;
+	transition: width .5s ease;
+}
+.intro-words b {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: block;
+	white-space: nowrap;
+	font-weight: 700;
+	line-height: 1.2;
+	opacity: 0;
+	transform-origin: 50% 100%;
+	transform: rotateX(180deg);
+}
+.intro-words b.is-visible {
+	position: relative;
+	opacity: 1;
+	transform: rotateX(0deg);
+}
+.intro-words b.is-in {
+	animation: intro-rotate-in 1.2s;
+}
+.intro-words b.is-out {
+	animation: intro-rotate-out 1.2s;
+}
 .intro-panel p {
+	margin: 0;
 	font-weight: 400;
 	color: #111;
 	text-align: justify;
@@ -515,7 +560,8 @@ section {
 	display: block;
 	flex: 1;
 	width: 100%;
-	height: 100%;
+	height: 272px;
+	min-height: 0;
 	color: inherit;
 }
 .promo-card:hover {
@@ -524,7 +570,7 @@ section {
 .promo-photo {
 	display: block;
 	height: 100%;
-	min-height: 100%;
+	min-height: 0;
 	border-radius: var(--radius2);
 	overflow: hidden;
 	background: #515151;
@@ -533,6 +579,7 @@ section {
 	display: block;
 	width: 100%;
 	height: 100%;
+	min-height: 0;
 	object-fit: cover;
 }
 .card-notch {
@@ -571,7 +618,8 @@ section {
 	transition: transform .3s ease;
 }
 .card-notch.is-gray i {
-	background: #8e939a;
+	background: var(--gray3);
+	color: var(--text);
 }
 .card-notch.is-primary i {
 	background: var(--primary);
@@ -965,7 +1013,7 @@ section {
 	width: calc(100% - 318px) !important;
 	min-width: 0;
 	overflow: visible;
-	clip-path: inset(0 0 -420px 0);
+	clip-path: inset(-24px 0 -420px 0);
 }
 .reviews-chip {
 	float: right;
@@ -1082,7 +1130,7 @@ section {
 	color: var(--text);
 	border-radius: var(--radius2);
 	box-shadow: 0 2px 14px rgba(41, 41, 94, .12);
-	overflow: hidden;
+	overflow: visible;
 	transition: height .45s ease;
 }
 .review-card:hover {
@@ -1605,6 +1653,18 @@ section {
 	50% { transform: scale(1.5); }
 	100% { opacity: 0; transform: scale(2); }
 }
+@keyframes intro-rotate-in {
+	0% { transform: rotateX(180deg); opacity: 0; }
+	35% { transform: rotateX(120deg); opacity: 0; }
+	65% { opacity: 0; }
+	100% { transform: rotateX(0deg); opacity: 1; }
+}
+@keyframes intro-rotate-out {
+	0% { transform: rotateX(0deg); opacity: 1; }
+	35% { transform: rotateX(-40deg); opacity: 1; }
+	65% { opacity: 0; }
+	100% { transform: rotateX(180deg); opacity: 0; }
+}
 @keyframes logo-run {
 	from { transform: translate3d(0, 0, 0); }
 	to { transform: translate3d(-50%, 0, 0); }
@@ -1615,6 +1675,7 @@ section {
 	.play-btn::after,
 	.know-ring,
 	.logo-track,
+	.intro-words b,
 	.site-footer .line::after,
 	[data-reveal] {
 		animation: none;
