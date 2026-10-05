@@ -300,22 +300,22 @@
     }
 
     var revealItems = document.querySelectorAll("[data-reveal]");
-    if ("IntersectionObserver" in window && revealItems.length) {
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("is-shown");
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.25 });
+    function inView(el, topRatio, bottomRatio) {
+        var rect = el.getBoundingClientRect();
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        return rect.top < vh * topRatio && rect.bottom > vh * bottomRatio;
+    }
+    function revealInView() {
         revealItems.forEach(function (item) {
-            observer.observe(item);
+            if (!item.classList.contains("is-shown") && inView(item, 0.92, 0.05)) {
+                item.classList.add("is-shown");
+            }
         });
-    } else {
-        revealItems.forEach(function (item) {
-            item.classList.add("is-shown");
-        });
+    }
+    if (revealItems.length) {
+        window.addEventListener("scroll", revealInView, { passive: true });
+        window.addEventListener("resize", revealInView);
+        revealInView();
     }
 
     var counters = document.querySelectorAll("[data-count]");
@@ -334,6 +334,7 @@
         requestAnimationFrame(tick);
     }
     var logoSets = document.querySelectorAll(".logo-set");
+    var logoMarquee = document.querySelector(".logo-marquee");
     if (logoSets.length) {
         var seed = logoSets[0].innerHTML;
         var guard = 0;
@@ -344,21 +345,106 @@
             guard += 1;
         }
     }
-
-    if ("IntersectionObserver" in window && counters.length) {
-        var countObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    counters.forEach(runCount);
-                    countObserver.disconnect();
-                }
+    if (logoMarquee) {
+        var logoImgs = logoMarquee.querySelectorAll("img");
+        var paintLogos = function () {
+            var box = logoMarquee.getBoundingClientRect();
+            var mid = box.left + box.width / 2;
+            var half = box.width / 2 || 1;
+            logoImgs.forEach(function (img) {
+                var rect = img.getBoundingClientRect();
+                var center = rect.left + rect.width / 2;
+                var dist = Math.min(1, Math.abs(center - mid) / half);
+                img.style.filter = "grayscale(" + dist.toFixed(3) + ")";
             });
-        }, { threshold: 0.4 });
-        var stats = document.querySelector(".stats-card");
-        if (stats) {
-            countObserver.observe(stats);
+            requestAnimationFrame(paintLogos);
+        };
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            paintLogos();
         }
-    } else {
-        counters.forEach(runCount);
     }
+
+    document.querySelectorAll(".review-card").forEach(function (card) {
+        var text = card.querySelector(".review-text");
+        if (text) {
+            text.style.display = "block";
+            text.style.webkitLineClamp = "unset";
+        }
+        card.style.height = "auto";
+        card.style.setProperty("--full", card.scrollHeight + "px");
+        card.style.height = "";
+        if (text) {
+            text.style.display = "";
+            text.style.webkitLineClamp = "";
+        }
+    });
+
+    var blogCards = document.querySelectorAll(".blog-card");
+    var blogSection = document.querySelector(".blog-section");
+    var blogShown = !blogCards.length;
+    var revealBlog = function () {};
+    if (blogCards.length) {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            blogCards.forEach(function (card) { card.classList.add("is-shown"); });
+            blogShown = true;
+        } else if (blogSection) {
+            blogShown = false;
+            revealBlog = function () {
+                if (blogShown) {
+                    return;
+                }
+                if (!inView(blogSection, 0.9, 0.08)) {
+                    return;
+                }
+                blogShown = true;
+                blogCards.forEach(function (card, index) {
+                    window.setTimeout(function () {
+                        card.classList.add("is-shown");
+                    }, index * 500);
+                });
+                window.removeEventListener("scroll", revealBlog);
+                window.removeEventListener("resize", revealBlog);
+            };
+            window.addEventListener("scroll", revealBlog, { passive: true });
+            window.addEventListener("resize", revealBlog);
+            revealBlog();
+        }
+    }
+
+    var stats = document.querySelector(".stats-card");
+    var counted = false;
+    function maybeCount() {
+        if (counted || !stats || !counters.length) {
+            return;
+        }
+        if (!inView(stats, 0.9, 0.1)) {
+            return;
+        }
+        counted = true;
+        counters.forEach(runCount);
+        window.removeEventListener("scroll", maybeCount);
+        window.removeEventListener("resize", maybeCount);
+    }
+    if (stats && counters.length) {
+        window.addEventListener("scroll", maybeCount, { passive: true });
+        window.addEventListener("resize", maybeCount);
+        maybeCount();
+    }
+
+    var pulse = window.setInterval(function () {
+        revealInView();
+        if (typeof revealBlog === "function") {
+            revealBlog();
+        }
+        maybeCount();
+        var headsLeft = false;
+        revealItems.forEach(function (item) {
+            if (!item.classList.contains("is-shown")) {
+                headsLeft = true;
+            }
+        });
+        if (!headsLeft && blogShown && counted) {
+            window.clearInterval(pulse);
+        }
+    }, 200);
 })();
