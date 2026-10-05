@@ -30,7 +30,11 @@
     if (typeof Swiper !== "undefined" && document.querySelector(".hero-swiper")) {
         new Swiper(".hero-swiper", {
             loop: true,
-            speed: 750,
+            effect: "fade",
+            fadeEffect: {
+                crossFade: true
+            },
+            speed: 900,
             autoplay: {
                 delay: 4500,
                 disableOnInteraction: false
