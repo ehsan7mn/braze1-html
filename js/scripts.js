@@ -21,6 +21,45 @@
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
+    var footerBgs = document.querySelectorAll(".footer-bg");
+    var footerReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var footerFrame = 0;
+    function paintFooterParallax() {
+        if (footerReduce || !footerBgs.length) {
+            return;
+        }
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        footerBgs.forEach(function (bg) {
+            var parent = bg.parentElement;
+            if (!parent) {
+                return;
+            }
+            var rect = parent.getBoundingClientRect();
+            var span = vh + rect.height;
+            var progress = span ? (vh - rect.top) / span : 0.5;
+            if (progress < 0) {
+                progress = 0;
+            } else if (progress > 1) {
+                progress = 1;
+            }
+            var distance = (progress - 0.5) * 80;
+            var dir = bg.classList.contains("is-reverse") ? -1 : 1;
+            bg.style.transform = "translate3d(0," + (dir * distance).toFixed(1) + "px,0)";
+        });
+    }
+    function queueFooterParallax() {
+        if (footerFrame) {
+            return;
+        }
+        footerFrame = window.requestAnimationFrame(function () {
+            footerFrame = 0;
+            paintFooterParallax();
+        });
+    }
+    paintFooterParallax();
+    window.addEventListener("scroll", queueFooterParallax, { passive: true });
+    window.addEventListener("resize", queueFooterParallax);
+
     document.querySelectorAll('a[href="#"]').forEach(function (link) {
         link.addEventListener("click", function (event) {
             event.preventDefault();
