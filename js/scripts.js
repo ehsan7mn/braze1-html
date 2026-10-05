@@ -35,14 +35,16 @@
                 return;
             }
             var rect = parent.getBoundingClientRect();
-            var span = vh + rect.height;
-            var progress = span ? (vh - rect.top) / span : 0.5;
+            var maxScroll = Math.max(0, document.documentElement.scrollHeight - vh);
+            var enter = rect.top + window.scrollY - vh;
+            var room = maxScroll - enter;
+            var progress = room > 1 ? (window.scrollY - enter) / room : 0.5;
             if (progress < 0) {
                 progress = 0;
             } else if (progress > 1) {
                 progress = 1;
             }
-            var distance = (progress - 0.5) * 80;
+            var distance = (progress - 0.5) * rect.height * 1.4;
             var dir = bg.classList.contains("is-reverse") ? -1 : 1;
             bg.style.transform = "translate3d(0," + (dir * distance).toFixed(1) + "px,0)";
         });
