@@ -75,6 +75,7 @@
     <section class="hero-section">
         <div class="container">
             <div class="hero-swiper-wrap position-relative">
+                <canvas class="hero-glitch" id="heroGlitch" aria-hidden="true"></canvas>
                 <div class="swiper hero-swiper" dir="rtl">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
@@ -104,21 +105,279 @@
                 <button class="hero-nav hero-prev" type="button" aria-label="اسلاید قبلی">
                     <svg width="83" height="285" viewBox="0 0 83 285" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path opacity="0.14" d="M80.0469 7.4043V284.222V251.904C80.0469 236.962 74.4721 222.559 64.4132 211.51L30.6937 174.474C13.323 155.395 13.323 126.231 30.6937 107.152L64.4132 70.116C74.4721 59.0678 80.0469 44.664 80.0469 29.7226V7.4043Z" fill="black"/>
-                        <path d="M82.0469 0.404297V277.222V244.904C82.0469 229.962 76.4721 215.559 66.4132 204.51L32.6937 167.474C15.323 148.395 15.323 119.231 32.6937 100.152L66.4132 63.116C76.4721 52.0678 82.0469 37.664 82.0469 22.7226V0.404297Z" fill="white"/>
-                        <path d="M55.1719 141.413L60.6052 135.98C61.2469 135.338 61.2469 134.288 60.6052 133.646L55.1719 128.213" stroke="#C3CDDC" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path class="tab-fill" d="M82.0469 0.404297V277.222V244.904C82.0469 229.962 76.4721 215.559 66.4132 204.51L32.6937 167.474C15.323 148.395 15.323 119.231 32.6937 100.152L66.4132 63.116C76.4721 52.0678 82.0469 37.664 82.0469 22.7226V0.404297Z" fill="white"/>
+                        <path class="tab-chevron" d="M55.1719 141.413L60.6052 135.98C61.2469 135.338 61.2469 134.288 60.6052 133.646L55.1719 128.213" stroke="#C3CDDC" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
                 <button class="hero-nav hero-next" type="button" aria-label="اسلاید بعدی">
                     <svg width="83" height="285" viewBox="0 0 83 285" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path opacity="0.14" d="M2.80469 7.5332V284.351V252.033C2.80469 237.091 8.37946 222.688 18.4383 211.639L52.1578 174.603C69.5286 155.524 69.5286 126.36 52.1578 107.281L18.4383 70.2449C8.37946 59.1967 2.80469 44.7929 2.80469 29.8515V7.5332Z" fill="black"/>
-                        <path d="M0.804688 0.533203V277.351V245.033C0.804688 230.091 6.37946 215.688 16.4383 204.639L50.1578 167.603C67.5286 148.524 67.5286 119.36 50.1578 100.281L16.4383 63.2449C6.37946 52.1967 0.804688 37.7929 0.804688 22.8515V0.533203Z" fill="white"/>
-                        <path d="M27.6797 141.542L22.2464 136.108C21.6047 135.467 21.6047 134.417 22.2464 133.775L27.6797 128.342" stroke="#C3CDDC" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path class="tab-fill" d="M0.804688 0.533203V277.351V245.033C0.804688 230.091 6.37946 215.688 16.4383 204.639L50.1578 167.603C67.5286 148.524 67.5286 119.36 50.1578 100.281L16.4383 63.2449C6.37946 52.1967 0.804688 37.7929 0.804688 22.8515V0.533203Z" fill="white"/>
+                        <path class="tab-chevron" d="M27.6797 141.542L22.2464 136.108C21.6047 135.467 21.6047 134.417 22.2464 133.775L27.6797 128.342" stroke="#C3CDDC" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
             </div>
         </div>
     </section>
-    <div class="preview-space" aria-hidden="true"></div>
+    <section class="intro-section">
+        <div class="container">
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-6">
+                    <div class="intro-panel h-100">
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می‌باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می‌طلبد تا با نرم‌افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.</p>
+                        <span class="intro-rule" aria-hidden="true"></span>
+                        <a class="intro-arrow" href="#" aria-label="ادامه معرفی"><i class="bi bi-chevron-left" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <a class="promo-card" href="#"><img src="img/promo-care.jpg" alt="برای مراقبت از پوست در هوای سرد"></a>
+                </div>
+                <div class="col-lg-3">
+                    <a class="promo-card" href="#"><img src="img/promo-care.jpg" alt="برای مراقبت از پوست در هوای سرد"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="container">
+            <div class="section-head d-flex align-items-center justify-content-between">
+                <div class="section-title d-flex align-items-center gap-3" data-reveal="right">
+                    <span class="section-icon"><i class="bi bi-battery-full" aria-hidden="true"></i></span>
+                    <div>
+                        <h2>جدیدترین محصولات</h2>
+                        <p>جدیدترین باتری‌های برند بِرِیز</p>
+                    </div>
+                </div>
+                <a class="btn-soft" href="#" data-reveal="left">
+                    <i class="bi bi-download" aria-hidden="true"></i>
+                    <span>دانلود کاتالوگ</span>
+                </a>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <article class="know-card h-100">
+                        <button class="play-btn" type="button" aria-label="پخش"><i class="bi bi-play-fill" aria-hidden="true"></i></button>
+                        <h3>بیشتر بدانید</h3>
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.</p>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="product-card h-100">
+                        <a class="product-media" href="#"><img src="img/products/laptop-1.jpg" alt=""></a>
+                        <div class="product-price"><span>1,250,000 <span class="toman">تومان</span></span></div>
+                        <div class="product-row d-flex align-items-center justify-content-between">
+                            <span class="product-balance" aria-hidden="true"></span>
+                            <h3 class="product-name">باتری UPS ۱۲ ولت ۷ آمپر</h3>
+                            <button class="add-cart" type="button" aria-label="افزودن به سبد خرید"><i class="bi bi-cart-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="product-card h-100">
+                        <a class="product-media" href="#">
+                            <span class="product-off">تخفیف ۱۰٪</span>
+                            <img src="img/products/laptop-2.jpg" alt="">
+                        </a>
+                        <div class="product-price">
+                            <del>2,400,000</del>
+                            <span>2,160,000 <span class="toman">تومان</span></span>
+                        </div>
+                        <div class="product-row d-flex align-items-center justify-content-between">
+                            <span class="product-balance" aria-hidden="true"></span>
+                            <h3 class="product-name">باتری خودرو سواری</h3>
+                            <button class="add-cart" type="button" aria-label="افزودن به سبد خرید"><i class="bi bi-cart-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="product-card h-100">
+                        <a class="product-media" href="#"><img src="img/products/laptop-3.jpg" alt=""></a>
+                        <div class="product-price"><span>3,450,000 <span class="toman">تومان</span></span></div>
+                        <div class="product-row d-flex align-items-center justify-content-between">
+                            <span class="product-balance" aria-hidden="true"></span>
+                            <h3 class="product-name">باتری اینورتر ۱۰۰ آمپر</h3>
+                            <button class="add-cart" type="button" aria-label="افزودن به سبد خرید"><i class="bi bi-cart-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="product-card h-100">
+                        <a class="product-media" href="#"><img src="img/products/laptop-1.jpg" alt=""></a>
+                        <div class="product-price"><span>185,000 <span class="toman">تومان</span></span></div>
+                        <div class="product-row d-flex align-items-center justify-content-between">
+                            <span class="product-balance" aria-hidden="true"></span>
+                            <h3 class="product-name">باتری شارژی قلمی</h3>
+                            <button class="add-cart" type="button" aria-label="افزودن به سبد خرید"><i class="bi bi-cart-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="product-card h-100">
+                        <a class="product-media" href="#">
+                            <span class="product-off">تخفیف ۲۵٪</span>
+                            <img src="img/products/laptop-2.jpg" alt="">
+                        </a>
+                        <div class="product-price">
+                            <del>1,800,000</del>
+                            <span>1,350,000 <span class="toman">تومان</span></span>
+                        </div>
+                        <div class="product-row d-flex align-items-center justify-content-between">
+                            <span class="product-balance" aria-hidden="true"></span>
+                            <h3 class="product-name">باتری موتورسیکلت</h3>
+                            <button class="add-cart" type="button" aria-label="افزودن به سبد خرید"><i class="bi bi-cart-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="product-card h-100">
+                        <a class="product-media" href="#"><img src="img/products/laptop-3.jpg" alt=""></a>
+                        <div class="product-price"><span>2,890,000 <span class="toman">تومان</span></span></div>
+                        <div class="product-row d-flex align-items-center justify-content-between">
+                            <span class="product-balance" aria-hidden="true"></span>
+                            <h3 class="product-name">باتری اتمی ۷۴ آمپر</h3>
+                            <button class="add-cart" type="button" aria-label="افزودن به سبد خرید"><i class="bi bi-cart-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-lg-3">
+                    <article class="product-card h-100">
+                        <a class="product-media" href="#"><img src="img/products/laptop-1.jpg" alt=""></a>
+                        <div class="product-price"><span>4,200,000 <span class="toman">تومان</span></span></div>
+                        <div class="product-row d-flex align-items-center justify-content-between">
+                            <span class="product-balance" aria-hidden="true"></span>
+                            <h3 class="product-name">باتری استارت سنگین</h3>
+                            <button class="add-cart" type="button" aria-label="افزودن به سبد خرید"><i class="bi bi-cart-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-card d-flex align-items-center justify-content-between">
+                <div class="stat">
+                    <div class="stat-label">سال سابقه</div>
+                    <div class="stat-num"><span data-count="15">0</span><span>+</span></div>
+                </div>
+                <span class="stat-line" aria-hidden="true"></span>
+                <div class="stat">
+                    <div class="stat-label">پروژه موفق</div>
+                    <div class="stat-num"><span data-count="2700">0</span><span>+</span></div>
+                </div>
+                <span class="stat-line" aria-hidden="true"></span>
+                <div class="stat">
+                    <div class="stat-label">محصول متنوع</div>
+                    <div class="stat-num"><span data-count="30">0</span><span>+</span></div>
+                </div>
+                <span class="stat-line" aria-hidden="true"></span>
+                <div class="stat">
+                    <div class="stat-label">مشتریان راضی</div>
+                    <div class="stat-num"><span data-count="1200">0</span><span>+</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="container">
+            <div class="reviews-head d-flex align-items-end justify-content-between">
+                <div>
+                    <h2>دیدگاه خریدارها</h2>
+                    <p>تجربه مشتریانی که باتری صنعتی و خودرویی بِرِیز را تهیه کرده‌اند.</p>
+                </div>
+                <div class="review-nav d-flex align-items-center gap-2">
+                    <button class="review-arrow review-prev" type="button" aria-label="قبلی"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+                    <button class="review-arrow review-next" type="button" aria-label="بعدی"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="swiper review-swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <article class="review-card">
+                            <h3>محسن جمشیدی</h3>
+                            <p class="review-role">مدیر تامین شرکت آریا</p>
+                            <p class="review-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می‌باشد. کتابهای زیادی در شصت و سه درصد گذشته حال و آینده شناخت فراوان جامعه و متخصصان را می‌طلبد تا با نرم‌افزارها شناخت بیشتری را برای طراحان رایانه‌ای ایجاد کرد.</p>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="review-card">
+                            <h3>مهشید موسوی</h3>
+                            <p class="review-role">مدیر فروش شرکت پارسیان</p>
+                            <p class="review-text">در این صورت می‌توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است و برای شرایط فعلی تکنولوژی مورد نیاز کاربرد دارد.</p>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="review-card">
+                            <h3>رضا کاظمی</h3>
+                            <p class="review-role">مدیر خرید شرکت سپهر</p>
+                            <p class="review-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می‌باشد. کتابهای زیادی در شصت و سه درصد گذشته شناخت فراوان جامعه و متخصصان را می‌طلبد.</p>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="review-card">
+                            <h3>نسترن احمدی</h3>
+                            <p class="review-role">مسئول تدارکات شرکت نوین</p>
+                            <p class="review-text">فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می‌توان امید داشت که تمام و دشواری موجود در ارائه راهکارها به پایان رسد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز است.</p>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="review-card">
+                            <h3>کامران یوسفی</h3>
+                            <p class="review-role">مدیر فنی شرکت رادمان</p>
+                            <p class="review-text">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. زمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد. کتابهای زیادی در شصت و سه درصد گذشته حال و آینده شناخت فراوان جامعه را می‌طلبد.</p>
+                        </article>
+                    </div>
+                    <div class="swiper-slide">
+                        <article class="review-card">
+                            <h3>الهام شریفی</h3>
+                            <p class="review-role">مدیر بازرگانی شرکت پارس انرژی</p>
+                            <p class="review-text">چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می‌باشد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ است و کتابهای زیادی در شصت و سه درصد گذشته شناخت فراوان جامعه و متخصصان را می‌طلبد.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logo-marquee" aria-label="لوگوی مشتریان">
+            <div class="logo-track">
+                <img src="img/clients/aria.svg" alt="آریا" width="120" height="120">
+                <img src="img/clients/parsian.svg" alt="پارسیان" width="120" height="120">
+                <img src="img/clients/sepehr.svg" alt="سپهر" width="120" height="120">
+                <img src="img/clients/novin.svg" alt="نوین" width="120" height="120">
+                <img src="img/clients/radman.svg" alt="رادمان" width="120" height="120">
+                <img src="img/clients/pars.svg" alt="پارس" width="120" height="120">
+                <img src="img/clients/tara.svg" alt="تارا" width="120" height="120">
+                <img src="img/clients/kavir.svg" alt="کویر" width="120" height="120">
+                <img src="img/clients/aria.svg" alt="" width="120" height="120">
+                <img src="img/clients/parsian.svg" alt="" width="120" height="120">
+                <img src="img/clients/sepehr.svg" alt="" width="120" height="120">
+                <img src="img/clients/novin.svg" alt="" width="120" height="120">
+                <img src="img/clients/radman.svg" alt="" width="120" height="120">
+                <img src="img/clients/pars.svg" alt="" width="120" height="120">
+                <img src="img/clients/tara.svg" alt="" width="120" height="120">
+                <img src="img/clients/kavir.svg" alt="" width="120" height="120">
+            </div>
+        </div>
+    </section>
+
+    <section class="consult-section">
+        <div class="container">
+            <div class="consult-card d-flex align-items-center justify-content-between gap-4">
+                <div>
+                    <h2>مشاوره و استعلام قیمت</h2>
+                    <a class="consult-tel" href="tel:88457457">88457457</a>
+                    <p>لیست درخواست خود را ارسال کنید تا کارشناسان ما در سریعترین زمان ممکن استعلام قیمت را برای شما ارسال کنند.</p>
+                </div>
+                <a class="btn-soft btn-soft-glass" href="#">
+                    <i class="bi bi-whatsapp" aria-hidden="true"></i>
+                    <span>پیام در واتساپ</span>
+                </a>
+            </div>
+        </div>
+    </section>
 </main>
 
 <script src="js/bootstrap.bundle.min.js"></script>
